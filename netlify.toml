@@ -9,4 +9,3 @@
   to = "/"
   status = 401
   force = true
-  conditions = {Role = ["admin", "cms"]}

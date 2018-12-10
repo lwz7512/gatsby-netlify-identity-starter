@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import { isLoggedIn } from "../services/auth"
 
 export default class IndexPage extends React.Component {
   render() {
@@ -23,7 +24,9 @@ export default class IndexPage extends React.Component {
                   key={post.id}
                 >
                   <p>
-                    <Link className="has-text-primary" to={post.fields.slug}>
+                    <Link 
+                      className={isLoggedIn()?"has-text-primary":"has-text-unlogin"} 
+                      to={isLoggedIn() ? post.fields.slug:'/login'}>
                       {post.frontmatter.title}
                     </Link>
                     <span> &bull; </span>
@@ -33,7 +36,9 @@ export default class IndexPage extends React.Component {
                     {post.excerpt}
                     <br />
                     <br />
-                    <Link className="button is-small" to={post.fields.slug}>
+                    <Link 
+                      className={isLoggedIn()?"button is-small orange":"button is-small"}
+                      to={isLoggedIn() ? post.fields.slug:'/login'}>
                       Keep Reading →
                     </Link>
                   </p>

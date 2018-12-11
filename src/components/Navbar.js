@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import github from '../img/github-icon.svg'
+// import github from '../img/github-icon.svg'
 import logo from '../img/logo.svg'
 import avatar from '../img/abstract-user-flat-3.svg'
 

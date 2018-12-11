@@ -111,7 +111,7 @@ export default class IndexPage extends React.Component {
     this.state = {
        
     }
-    window.netlifyIdentity = netlifyIdentity;
+    // window.netlifyIdentity = netlifyIdentity;
     // You must run this once before trying to interact with the widget
     netlifyIdentity.init()
     console.log('netlify id inited....')

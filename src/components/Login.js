@@ -1,6 +1,6 @@
 import React from "react"
 
-import { handleLogin, } from "../services/auth"
+import { handleLogin, isLoggedIn } from "../services/auth"
 
 class Login extends React.Component {
   

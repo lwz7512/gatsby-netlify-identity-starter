@@ -40,8 +40,7 @@ const Navbar = class extends React.Component {
  render() {
 
   let user = this.context
-
-  console.log('user in nvbar:', user)
+  // console.log('user in nvbar:', user)
 
    return (
   
@@ -76,7 +75,6 @@ const Navbar = class extends React.Component {
         <div className="navbar-end has-text-centered">
           <a
             className="navbar-item"
-            href="javascript:void(0)"
             target="_blank"
             rel="noopener noreferrer"
             onClick={this.handleUserNavigate}

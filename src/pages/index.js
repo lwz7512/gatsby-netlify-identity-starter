@@ -10,7 +10,8 @@ import { isLoggedIn } from "../services/auth"
 
 
 // init netlify identity ...
-netlifyIdentity.init();
+// FIX for build test @2018/12/13
+if(typeof netlifyIdentity.init !== `undefined`) netlifyIdentity.init();
 console.log('NLI init...')
 
 

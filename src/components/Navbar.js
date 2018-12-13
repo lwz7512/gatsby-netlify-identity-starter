@@ -1,10 +1,18 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import github from '../img/github-icon.svg'
+import { Link, navigate } from 'gatsby'
+// import github from '../img/github-icon.svg'
 import logo from '../img/logo.svg'
 import avatar from '../img/abstract-user-flat-3.svg'
 
+import UserContext from '../context/UserContext'
+
 const Navbar = class extends React.Component {
+
+
+  handleUserNavigate() {
+    console.log('user avatar clicked!')
+    navigate('/login')
+  }
 
   componentDidMount() {
     // Get all "navbar-burger" elements
@@ -30,52 +38,61 @@ const Navbar = class extends React.Component {
  }
  
  render() {
+
+  let user = this.context
+
+  console.log('user in nvbar:', user)
+
    return (
   
-  <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
-    <div className="container">
-      <div className="navbar-brand">
-        <Link to="/" className="navbar-item" title="Logo">
-          <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
-        </Link>
-        {/* Hamburger menu */}
-        <div className="navbar-burger burger" data-target="navMenu">
-          <span></span>
-          <span></span>
-          <span></span>
+    <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
+      <div className="container">
+        <div className="navbar-brand">
+          <Link to="/" className="navbar-item" title="Logo">
+            <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
+          </Link>
+          {/* Hamburger menu */}
+          <div className="navbar-burger burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div id="navMenu" className="navbar-menu">
+        <div className="navbar-start has-text-centered">
+          <Link className="navbar-item" to="/about">
+            About
+          </Link>
+          <Link className="navbar-item" to="/products">
+            Products
+          </Link>
+          <Link className="navbar-item" to="/contact">
+            Contact
+          </Link>
+          <Link className="navbar-item" to="/contact/examples">
+            Form Examples
+          </Link>
+        </div>
+        <div className="navbar-end has-text-centered">
+          <a
+            className="navbar-item"
+            href="javascript:void(0)"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={this.handleUserNavigate}
+          >
+            {user?
+              (<span className="username-navbar">Welcome {user.user_metadata.full_name}</span>):
+              (<span className="icon"><img src={avatar} alt="User" /></span>)
+            }
+          </a>
+        </div>
         </div>
       </div>
-      <div id="navMenu" className="navbar-menu">
-      <div className="navbar-start has-text-centered">
-        <Link className="navbar-item" to="/about">
-          About
-        </Link>
-        <Link className="navbar-item" to="/products">
-          Products
-        </Link>
-        <Link className="navbar-item" to="/contact">
-          Contact
-        </Link>
-        <Link className="navbar-item" to="/contact/examples">
-          Form Examples
-        </Link>
-      </div>
-      <div className="navbar-end has-text-centered">
-        <a
-          className="navbar-item"
-          href="javascript:void(0)"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="icon">
-            <img src={avatar} alt="User" />
-          </span>
-        </a>
-      </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
   )}
 }
+
+Navbar.contextType = UserContext
 
 export default Navbar

@@ -1,3 +1,6 @@
+import netlifyIdentity from 'netlify-identity-widget';
+
+
 export const isBrowser = () => typeof window !== "undefined"
 
 export const getUser = () =>

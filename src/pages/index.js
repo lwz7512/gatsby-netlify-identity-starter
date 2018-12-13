@@ -1,16 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
-import Layout from '../components/Layout'
+// inlude NLI ...to init first
+import netlifyIdentity from 'netlify-identity-widget'
+
+import BasePage from '../components/BasePage'
 import { isLoggedIn } from "../services/auth"
 
+
+
+// init netlify identity ...
+netlifyIdentity.init();
+console.log('NLI init...')
+
+
 export default class IndexPage extends React.Component {
+
+
+  constructor(props) {
+    super(props)
+    
+  }
+
+  componentDidMount() {
+    
+  }
+  
+
   render() {
     const { data } = this.props
     const { edges: posts } = data.allMarkdownRemark
 
     return (
-      <Layout>
+      <BasePage>
         <section className="section">
           <div className="container">
             <div className="content">
@@ -46,7 +68,7 @@ export default class IndexPage extends React.Component {
               ))}
           </div>
         </section>
-      </Layout>
+      </BasePage>
     )
   }
 }

@@ -12,7 +12,7 @@ import { isLoggedIn } from "../services/auth"
 // init netlify identity ...
 // FIX for build test @2018/12/13
 if(typeof netlifyIdentity.init !== `undefined`) netlifyIdentity.init();
-console.log('NLI init...')
+// console.log('NLI init...')
 
 
 export default class IndexPage extends React.Component {

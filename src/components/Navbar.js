@@ -39,7 +39,8 @@ const Navbar = class extends React.Component {
  
  render() {
 
-  let user = this.context
+  let {user} = this.context
+  // console.log(this.context)
   // console.log('user in nvbar:', user)
 
    return (
@@ -78,7 +79,7 @@ const Navbar = class extends React.Component {
             target="_blank"
             rel="noopener noreferrer"
             onClick={this.handleUserNavigate}
-          >
+            >
             {user?
               (<span className="username-navbar">Welcome {user.user_metadata.full_name}</span>):
               (<span className="icon"><img src={avatar} alt="User" /></span>)

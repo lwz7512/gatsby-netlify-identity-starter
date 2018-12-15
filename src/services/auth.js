@@ -1,5 +1,25 @@
 import netlifyIdentity from 'netlify-identity-widget';
 
+// 1. check log status
+export const isLoggedIn = () => {
+  // const user = getUser()
+  const user = netlifyIdentity.currentUser();
+  return !!user
+}
+// 2. log in
+export const loginNI = callback => {
+  netlifyIdentity.open()
+  netlifyIdentity.on('login', (user)=>{
+    netlifyIdentity.close()
+    callback(user)
+  })
+}
+
+// 3. log out
+export const logoutNI = callback => {
+  netlifyIdentity.logout();
+  netlifyIdentity.on('logout', callback)
+}
 
 export const isBrowser = () => typeof window !== "undefined"
 
@@ -23,15 +43,4 @@ export const handleLogin = ({ username, password }) => {
   }
 
   return false
-}
-
-export const isLoggedIn = () => {
-  const user = getUser()
-
-  return !!user.username
-}
-
-export const logout = callback => {
-  setUser({})
-  callback()
 }

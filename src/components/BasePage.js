@@ -19,7 +19,11 @@ export default class BasePage extends React.Component {
     }
   }
   
-
+  // called by outside
+  updateUser(user) {
+    this.setState({user:user})
+    console.log('update user:', user);
+  }
 
   componentDidMount() {
     const user = netlifyIdentity.currentUser();
@@ -29,7 +33,7 @@ export default class BasePage extends React.Component {
 
   render() {
     return (
-      <UserContext.Provider value={this.state.user}>
+      <UserContext.Provider value={this.state}>
         <Layout>
         {this.props.children} 
         </Layout>

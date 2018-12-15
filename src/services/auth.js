@@ -3,8 +3,10 @@ import netlifyIdentity from 'netlify-identity-widget';
 // 1. check log status
 export const isLoggedIn = () => {
   // const user = getUser()
-  const user = netlifyIdentity.currentUser();
-  return !!user
+  if(typeof netlifyIdentity.currentUser !== `undefined`){
+    return !!netlifyIdentity.currentUser();
+  }
+  return false
 }
 // 2. log in
 export const loginNI = callback => {

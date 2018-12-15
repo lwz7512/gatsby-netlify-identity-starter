@@ -36,6 +36,7 @@ export default class LoginPage extends React.Component {
       console.log('logged in!')
       this.setState({logged: true})
       this.basepage.current.updateUser(user)
+      this.goHome()
     })
   }
 
@@ -43,8 +44,9 @@ export default class LoginPage extends React.Component {
     console.log('logout....')
     this.setState({loading:true})
     logoutNI(() => {
-      this.setState({loading:false})
-      this.goHome()
+      this.setState({loading:false, logged: false})
+      this.basepage.current.updateUser(null)
+      // this.goHome()
     })
   }
 

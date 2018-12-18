@@ -2,6 +2,9 @@ import React from "react";
 import { navigate } from "gatsby-link";
 import Layout from '../../components/Layout'
 
+import BasePage from '../../components/BasePage'
+
+
 function encode(data) {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
@@ -35,7 +38,7 @@ export default class Index extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <BasePage>
         <section className="section">
           <div className="container">
             <div className="content">
@@ -81,7 +84,7 @@ export default class Index extends React.Component {
         </div>
         </div>
         </section>
-      </Layout>
+      </BasePage>
     );
   }
 }

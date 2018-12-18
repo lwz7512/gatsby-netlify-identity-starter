@@ -7,6 +7,8 @@ import Testimonials from '../components/Testimonials'
 import Pricing from '../components/Pricing'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 
+import BasePage from '../components/BasePage'
+
 export const ProductPageTemplate = ({
   image,
   title,
@@ -136,7 +138,7 @@ const ProductPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
 
   return (
-    <Layout>
+    <BasePage>
       <ProductPageTemplate
         image={frontmatter.image}
         title={frontmatter.title}
@@ -148,7 +150,7 @@ const ProductPage = ({ data }) => {
         fullImage={frontmatter.full_image}
         pricing={frontmatter.pricing}
       />
-    </Layout>
+    </BasePage>
   )
 }
 

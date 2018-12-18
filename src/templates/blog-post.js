@@ -6,6 +6,8 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
+import BasePage from '../components/BasePage'
+
 export const BlogPostTemplate = ({
   content,
   contentComponent,
@@ -58,7 +60,7 @@ const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data
 
   return (
-    <Layout>
+    <BasePage>
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
@@ -74,7 +76,7 @@ const BlogPost = ({ data }) => {
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
       />
-    </Layout>
+    </BasePage>
   )
 }
 

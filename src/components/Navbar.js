@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link, navigate } from 'gatsby'
 // import github from '../img/github-icon.svg'
-import logo from '../img/logo.svg'
+// import logo from '../img/logo.svg'
+import saoke from '../img/saoke.png'
+import lisao from '../img/lisao.png'
 import avatar from '../img/abstract-user-flat-3.svg'
 
 import UserContext from '../context/UserContext'
@@ -43,13 +45,14 @@ const Navbar = class extends React.Component {
   // console.log(this.context)
   // console.log('user in nvbar:', user)
 
+
    return (
   
     <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
       <div className="container">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item" title="Logo">
-            <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
+            <img src={lisao} alt="Kaldi" style={{ width: 'auto' }} />
           </Link>
           {/* Hamburger menu */}
           <div className="navbar-burger burger" data-target="navMenu">
@@ -60,18 +63,21 @@ const Navbar = class extends React.Component {
         </div>
         <div id="navMenu" className="navbar-menu">
         <div className="navbar-start has-text-centered">
-          <Link className="navbar-item" to="/about">
-            About
+          <Link className="navbar-item" to="/">
+            Home
           </Link>
           <Link className="navbar-item" to="/products">
-            Products
+            Services
           </Link>
           <Link className="navbar-item" to="/contact">
-            Contact
+          Contact
           </Link>
-          <Link className="navbar-item" to="/contact/examples">
+          <Link className="navbar-item" to="/About">
+            About
+          </Link>
+          {/*<Link className="navbar-item" to="/contact/examples">
             Form Examples
-          </Link>
+          </Link>*/}
         </div>
         <div className="navbar-end has-text-centered">
           <a

@@ -31,40 +31,51 @@ export default class IndexPage extends React.Component {
   render() {
     const { data } = this.props
     const { edges: posts } = data.allMarkdownRemark
+    
+    const cntBorder = { 
+      // border: '1px solid #888',
+      borderBottomWidth: 1,
+      borderBottomColor: '#888',
+      borderBottomStyle: 'solid', // this attribute doesn't auto complete???
+      padding: '1em 0',
+      display: 'flex', // horizontal align thumbnail and text ...
+     }
 
     return (
       <BasePage>
         <section className="section">
           <div className="container">
             <div className="content">
-              <h1 className="has-text-weight-bold is-size-2">Latest Stories</h1>
+              {/*<h1 className="has-text-weight-bold is-size-2">最新资源</h1>*/}
             </div>
             {posts
               .map(({ node: post }) => (
                 <div
                   className="content"
-                  style={{ border: '1px solid #333', padding: '2em 4em' }}
+                  style={cntBorder}
                   key={post.id}
                 >
-                  <p>
-                    <Link 
-                      className={isLoggedIn()?"has-text-primary":"has-text-unlogin"} 
-                      to={isLoggedIn() ? post.fields.slug:'/login'}>
-                      {post.frontmatter.title}
-                    </Link>
-                    <span> &bull; </span>
-                    <small>{post.frontmatter.date}</small>
-                  </p>
-                  <p>
-                    {post.excerpt}
-                    <br />
-                    <br />
-                    <Link 
-                      className={isLoggedIn()?"button is-small orange":"button is-small"}
-                      to={isLoggedIn() ? post.fields.slug:'/login'}>
-                      Keep Reading →
-                    </Link>
-                  </p>
+                  {/** @2018/12/17 */}
+                  <img src={post.frontmatter.image.childImageSharp.fluid.src} className="thumbnail-img"/>
+                  <div className="post-item">
+                    <p className="post-title">
+                      <Link 
+                        className={isLoggedIn()?"has-text-primary":"has-text-unlogin"} 
+                        to={isLoggedIn() ? post.fields.slug:'/login'}>
+                        {post.frontmatter.title}
+                      </Link>
+                      <span> &bull; </span>
+                      <small>{post.frontmatter.date}</small>
+                    </p>
+                    <p>
+                      <span className="post-excerpt">{post.excerpt}</span>
+                      <Link 
+                        className={isLoggedIn()?"button is-small orange":"button is-small"}
+                        to={isLoggedIn() ? post.fields.slug:'/login'}>
+                        Keep Reading →
+                      </Link>
+                    </p>
+                  </div>
                 </div>
               ))}
           </div>
@@ -99,6 +110,15 @@ export const pageQuery = graphql`
             title
             templateKey
             date(formatString: "MMMM DD, YYYY")
+            
+            image {
+              childImageSharp {
+                fluid(maxWidth: 160, quality: 64) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+
           }
         }
       }

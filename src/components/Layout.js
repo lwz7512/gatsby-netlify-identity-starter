@@ -36,8 +36,16 @@ const TemplateWrapper = ({ children }) => (
           <meta property="og:url" content="/" />
           <meta property="og:image" content="/img/og-image.jpg" />
         </Helmet>
+        
         <Navbar />
+        
         <div>{children}</div>
+        
+        <footer>
+          <div style={{textAlign:'center', color: '#888'}}>
+            Logo made with <a href="https://www.designevo.com/en/" title="Free Online Logo Maker">DesignEvo</a>
+          </div>
+        </footer>
       </div>
     )}
   />

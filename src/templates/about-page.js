@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
+
 import Content, { HTMLContent } from '../components/Content'
 
-import BasePage from '../components/BasePage'
+import BasePage from '../base/BasePage'
 
 export const AboutPageTemplate = ({ title, content, contentComponent }) => {
   const PageContent = contentComponent || Content

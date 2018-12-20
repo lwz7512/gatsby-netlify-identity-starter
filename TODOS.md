@@ -14,4 +14,13 @@ TODO ITEMS
 
 * reorganize navigation bar to the right menu ... DONE
 * create new logo for `li-sao` ... DONE
-* add an thumbnail in the blog item in left side
+* add an thumbnail in the blog item in left side ... DONE
+* responsive index layout for mobile device ... DONE
+
+
+### THIRD PHASE @2018.12.18
+
+* add pagination for posts
+
+
+...

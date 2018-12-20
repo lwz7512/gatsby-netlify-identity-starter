@@ -3,7 +3,7 @@ import React from 'react';
 // import { navigate } from "gatsby"
 import { navigate } from "@reach/router"
 
-import BasePage from '../components/BasePage'
+import BasePage from '../base/BasePage'
 // import Login from '../components/Login' // form
 import Spinner from '../components/Spinner'
 

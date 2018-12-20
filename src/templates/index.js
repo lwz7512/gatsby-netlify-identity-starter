@@ -1,12 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+/**
+ * index template for the site as start point
+ * @2018/12/19
+ */
+
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby'
+import get from 'lodash/get'
+
 // inlude NLI ...to init first
 import netlifyIdentity from 'netlify-identity-widget'
 
-import BasePage from '../components/BasePage'
+import BasePage from '../base/BasePage'
+import Pagination from '../components/Pagination'
 import { isLoggedIn } from "../services/auth"
-
 
 
 // init netlify identity ...
@@ -18,20 +25,12 @@ if(typeof netlifyIdentity.init !== `undefined`) netlifyIdentity.init();
 export default class IndexPage extends React.Component {
 
 
-  constructor(props) {
-    super(props)
-    
-  }
-
-  componentDidMount() {
-    
-  }
-  
-
   render() {
-    const { data } = this.props
-    const { edges: posts } = data.allMarkdownRemark
     
+    const posts = get(this, 'props.data.allMarkdownRemark.edges')
+    const { currentPage, numPages } = this.props.pageContext
+    
+
     const cntBorder = { 
       // border: '1px solid #888',
       borderBottomWidth: 1,
@@ -46,7 +45,7 @@ export default class IndexPage extends React.Component {
         <section className="section">
           <div className="container">
             <div className="content">
-              {/*<h1 className="has-text-weight-bold is-size-2">最新资源</h1>*/}
+              {<h1 className="has-text-weight-bold is-size-3">新上</h1>}
             </div>
             {posts
               .map(({ node: post }) => (
@@ -56,7 +55,11 @@ export default class IndexPage extends React.Component {
                   key={post.id}
                 >
                   {/** @2018/12/17 */}
-                  <img src={post.frontmatter.image.childImageSharp.fluid.src} className="thumbnail-img"/>
+                  <img 
+                    src={post.frontmatter.image.childImageSharp.fluid.src} 
+                    className="thumbnail-img"
+                    alt="post thumbnail"
+                    />
                   <div className="post-item">
                     <p className="post-title">
                       <Link 
@@ -80,9 +83,16 @@ export default class IndexPage extends React.Component {
               ))}
           </div>
         </section>
+        {/** pagination row */}
+        <section className="section">
+          <Pagination 
+            currentPage={currentPage} 
+            numPages={numPages}/>
+        </section>
       </BasePage>
     )
   }
+
 }
 
 IndexPage.propTypes = {
@@ -94,10 +104,11 @@ IndexPage.propTypes = {
 }
 
 export const pageQuery = graphql`
-  query IndexQuery {
+  query HomeQuery($skip: Int!, $limit: Int!) {
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] },
-      filter: { frontmatter: { templateKey: { eq: "blog-post" } }}
+      filter: { frontmatter: { templateKey: { eq: "blog-post" } }},
+      limit: $limit, skip: $skip
     ) {
       edges {
         node {

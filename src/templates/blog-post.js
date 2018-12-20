@@ -3,10 +3,43 @@ import PropTypes from 'prop-types'
 import { kebabCase } from 'lodash'
 import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
-import Layout from '../components/Layout'
+
 import Content, { HTMLContent } from '../components/Content'
 
-import BasePage from '../components/BasePage'
+import BasePage from '../base/BasePage'
+
+
+const PrevNext = ({previous, next}) => {
+  return (
+    <ul
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        listStyle: 'none',
+        paddingLeft: '1em',
+        paddingRight: '1em',
+      }}
+    >
+      {previous && (
+        <li style={{marginBottom:10}}>
+          <Link to={previous.fields.slug} rel="prev">
+            ← {previous.frontmatter.title}
+          </Link>
+        </li>
+      )}
+
+      {next && (
+        <li style={{marginBottom:10}}>
+          <Link to={next.fields.slug} rel="next">
+            {next.frontmatter.title} →
+          </Link>
+        </li>
+      )}
+    </ul>
+  )
+}
+
 
 export const BlogPostTemplate = ({
   content,
@@ -56,8 +89,9 @@ BlogPostTemplate.propTypes = {
   helmet: PropTypes.object,
 }
 
-const BlogPost = ({ data }) => {
+const BlogPost = ({ data, pageContext }) => {
   const { markdownRemark: post } = data
+  const { previous, next } = pageContext
 
   return (
     <BasePage>
@@ -76,6 +110,9 @@ const BlogPost = ({ data }) => {
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
       />
+      <section className="section">
+        <PrevNext previous={previous} next={next} />
+      </section>
     </BasePage>
   )
 }

@@ -18,14 +18,15 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       },
     })
   }
-}
+}// end of onCreateWebpackConfig
+
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
   return graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
+      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
         edges {
           node {
             id
@@ -34,6 +35,7 @@ exports.createPages = ({ actions, graphql }) => {
             }
             frontmatter {
               tags
+              title
               templateKey
             }
           }
@@ -46,33 +48,61 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors)
     }
 
-    const posts = result.data.allMarkdownRemark.edges
+    // const blogpost = post => post.node.frontmatter.templateKey == 'blog-post';
+    // const posts = result.data.allMarkdownRemark.edges.filter(blogpost);
+    const posts = result.data.allMarkdownRemark.edges;
 
-    posts.forEach(edge => {
-      const id = edge.node.id
+    // Create blog post list pages
+    const postsPerPage = 5;
+    const numPages = Math.ceil(posts.length / postsPerPage);
+
+    // page path determine the access order
+    // here create `root` page of site by `/`
+    // @2018/12/19
+    _.times(numPages, i => {
       createPage({
-        path: edge.node.fields.slug,
-        tags: edge.node.frontmatter.tags,
+        path: i === 0 ? `/` : `/${i + 1}`,
+        component: path.resolve('./src/templates/index.js'),
+        context: {
+          limit: postsPerPage,
+          skip: i * postsPerPage,
+          numPages,
+          currentPage: i + 1
+        },
+      });
+    });// end of _.times
+
+    // create pages by template in .md
+    _.each(posts, (post, index) => {
+      const previous = (index === posts.length - 1) ? null : posts[index + 1].node;
+      const next = (index === 0) ? null : posts[index - 1].node;
+      const id = post.node.id;
+      createPage({
+        path: post.node.fields.slug,
+        tags: post.node.frontmatter.tags,
         component: path.resolve(
-          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
+          `src/templates/${String(post.node.frontmatter.templateKey)}.js`
         ),
         // additional data can be passed via context
         context: {
           id,
+          slug: post.node.fields.slug,
+          previous,
+          next,
         },
       })
-    })
+    });
 
     // Tag pages:
-    let tags = []
+    let tags = [];
     // Iterate through each post, putting all found tags into `tags`
     posts.forEach(edge => {
       if (_.get(edge, `node.frontmatter.tags`)) {
         tags = tags.concat(edge.node.frontmatter.tags)
       }
-    })
+    });
     // Eliminate duplicate tags
-    tags = _.uniq(tags)
+    tags = _.uniq(tags);
 
     // Make tag pages
     tags.forEach(tag => {
@@ -85,9 +115,10 @@ exports.createPages = ({ actions, graphql }) => {
           tag,
         },
       })
-    })
-  })
-}
+    });
+
+  })// end of then
+}// end of createPages
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions

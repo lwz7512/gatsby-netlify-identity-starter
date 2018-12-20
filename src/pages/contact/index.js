@@ -1,8 +1,7 @@
 import React from "react";
 import { navigate } from "gatsby-link";
-import Layout from '../../components/Layout'
 
-import BasePage from '../../components/BasePage'
+import BasePage from '../../base/BasePage'
 
 
 function encode(data) {

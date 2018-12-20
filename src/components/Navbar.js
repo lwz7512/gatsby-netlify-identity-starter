@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, navigate } from 'gatsby'
 // import github from '../img/github-icon.svg'
 // import logo from '../img/logo.svg'
-import saoke from '../img/saoke.png'
+// import saoke from '../img/saoke.png'
 import lisao from '../img/lisao.png'
 import avatar from '../img/abstract-user-flat-3.svg'
 
@@ -54,7 +54,7 @@ const Navbar = class extends React.Component {
           <Link to="/" className="navbar-item" title="Logo">
             <img src={lisao} alt="Kaldi" style={{ width: 'auto' }} />
           </Link>
-          {/* Hamburger menu */}
+          {/* Hamburger menu in mobile mode */}
           <div className="navbar-burger burger" data-target="navMenu">
             <span></span>
             <span></span>
@@ -62,36 +62,36 @@ const Navbar = class extends React.Component {
           </div>
         </div>
         <div id="navMenu" className="navbar-menu">
-        <div className="navbar-start has-text-centered">
-          <Link className="navbar-item" to="/">
-            Home
-          </Link>
-          <Link className="navbar-item" to="/products">
-            Services
-          </Link>
-          <Link className="navbar-item" to="/contact">
-          Contact
-          </Link>
-          <Link className="navbar-item" to="/About">
-            About
-          </Link>
-          {/*<Link className="navbar-item" to="/contact/examples">
-            Form Examples
-          </Link>*/}
-        </div>
-        <div className="navbar-end has-text-centered">
-          <a
-            className="navbar-item"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={this.handleUserNavigate}
-            >
-            {user?
-              (<span className="username-navbar">Welcome {user.user_metadata.full_name}</span>):
-              (<span className="icon"><img src={avatar} alt="User" /></span>)
-            }
-          </a>
-        </div>
+          <div className="navbar-start has-text-centered">
+            <Link className="navbar-item" to="/">
+              Home
+            </Link>
+            <Link className="navbar-item" to="/products">
+              Services
+            </Link>
+            <Link className="navbar-item" to="/contact">
+            Contact
+            </Link>
+            <Link className="navbar-item" to="/about">
+              About
+            </Link>
+            {/*<Link className="navbar-item" to="/contact/examples">
+              Form Examples
+            </Link>*/}
+          </div>
+          <div className="navbar-end has-text-centered">
+            <div
+              className="navbar-item"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={this.handleUserNavigate}
+              >
+              {user?
+                (<span className="username-navbar">Welcome {user.user_metadata.full_name}</span>):
+                (<span className="icon"><img src={avatar} alt="User" /></span>)
+              }
+            </div>
+          </div>
         </div>
       </div>
     </nav>

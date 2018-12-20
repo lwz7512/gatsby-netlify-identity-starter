@@ -6,7 +6,8 @@ import React from 'react';
 
 import netlifyIdentity from 'netlify-identity-widget'
 import UserContext from '../context/UserContext'
-import Layout from './Layout'
+// import Layout from '../components/Layout'
+import BaseLayout from './BaseLayout'
 
 export default class BasePage extends React.Component {
 
@@ -34,9 +35,9 @@ export default class BasePage extends React.Component {
   render() {
     return (
       <UserContext.Provider value={this.state}>
-        <Layout>
+        <BaseLayout>
         {this.props.children} 
-        </Layout>
+        </BaseLayout>
       </UserContext.Provider>
     )
   }

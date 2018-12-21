@@ -1,5 +1,11 @@
 import netlifyIdentity from 'netlify-identity-widget';
 
+// for temporarily cache in client
+// @2018/12/21
+const GlobalObj = {};
+Object.defineProperty(GlobalObj, 'pathname', {value: '/', writable: true});
+
+
 // 1. check log status
 export const isLoggedIn = () => {
   // const user = getUser()
@@ -30,14 +36,11 @@ export const getUser = () =>
     : {}
 
 // 5. save pathname
-export const setPathname = path => 
-  isBrowser() && window.localStorage.setItem('pathname', path)
+export const setPathname = path => GlobalObj.pathname = path
 
 // 6. get pathname
-export const getPathname = () =>
-isBrowser() && window.localStorage.getItem('pathname')
-  ? window.localStorage.getItem('pathname')
-  : '/'
+export const getPathname = () => GlobalObj.pathname
+
 
 export const isBrowser = () => typeof window !== "undefined"
 

@@ -5,21 +5,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, graphql } from 'gatsby'
-import get from 'lodash/get'
+import { graphql } from 'gatsby';
 
 // inlude NLI ...to init first
-import netlifyIdentity from 'netlify-identity-widget'
+import netlifyIdentity from 'netlify-identity-widget';
 
-import BasePage from '../base/BasePage'
-import Pagination from '../components/Pagination'
-import { isLoggedIn } from "../services/auth"
+import BasePage from '../base/BasePage';
+import Pagination from '../components/Pagination';
+import PostItem from '../components/PostItem';
+import { isLoggedIn } from "../services/auth";
 
 
 // init netlify identity ...
 // FIX for build test @2018/12/13
 if(typeof netlifyIdentity.init !== `undefined`) netlifyIdentity.init();
-// console.log('NLI init...')
 
 
 export default class IndexPage extends React.Component {
@@ -27,61 +26,22 @@ export default class IndexPage extends React.Component {
 
   render() {
     
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
-    const { currentPage, numPages } = this.props.pageContext
-    // Dont use this for post pagination...
-    // const location = this.props.location
-
-    const cntBorder = { 
-      // border: '1px solid #888',
-      borderBottomWidth: 1,
-      borderBottomColor: '#888',
-      borderBottomStyle: 'solid', // this attribute doesn't auto complete???
-      padding: '1em 0',
-      display: 'flex', // horizontal align thumbnail and text ...
-     }
+    const posts = this.props.data.allMarkdownRemark.edges;
+    const { currentPage, numPages } = this.props.pageContext;
+    const logged = isLoggedIn();
 
     return (
       <BasePage location={{pathname: '/'}}>
         <section className="section">
           <div className="container">
             <div className="content hide-in-mobile">
-              {<h1 className="has-text-weight-bold is-size-3">Latest</h1>}
+              <h1 className="has-text-weight-bold is-size-3">Latest</h1>
             </div>
             {posts
               .map(({ node: post }) => (
-                <div
-                  className="content"
-                  style={cntBorder}
-                  key={post.id}
-                >
-                  {/** @2018/12/17 */}
-                  <img 
-                    src={post.frontmatter.image.childImageSharp.fluid.src} 
-                    className="thumbnail-img"
-                    alt="post thumbnail"
-                    />
-                  <div className="post-item">
-                    <p className="post-title">
-                      <Link 
-                        className={isLoggedIn()?"has-text-primary":"has-text-unlogin"} 
-                        to={isLoggedIn() ? post.fields.slug:'/login'}>
-                        {post.frontmatter.title}
-                      </Link>
-                      <span> &bull; </span>
-                      <small>{post.frontmatter.date}</small>
-                    </p>
-                    <p>
-                      <span className="post-excerpt">{post.excerpt}</span>
-                      <Link 
-                        className={isLoggedIn()?"button is-small orange":"button is-small"}
-                        to={isLoggedIn() ? post.fields.slug:'/login'}>
-                        Keep Reading →
-                      </Link>
-                    </p>
-                  </div>
-                </div>
-              ))}
+                <PostItem post={post} logged={logged} />
+              ))
+            }
           </div>
         </section>
         {/** pagination row */}

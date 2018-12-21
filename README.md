@@ -1,36 +1,66 @@
-# Gatsby + Netlify CMS Starter
+# Gatsby Netlify Identity Starter
 
-**Note:** This starter uses the [Gatsby v2 Beta](https://www.gatsbyjs.org/blog/2018-06-16-announcing-gatsby-v2-beta-launch/).
+**Note:** This starter is based on the [Gatsby + Netlify CMS Starter](https://github.com/netlify-templates/gatsby-starter-netlify-cms).
 
-This repo contains an example business website that is built with [Gatsby](https://www.gatsbyjs.org/), and [Netlify CMS](https://www.netlifycms.org): **[Demo Link](https://gatsby-netlify-cms.netlify.com/)**.
+**But:** Remove the `gatsby-plugin-netlify-cms` and `netlify-cms` dependenicy to disable auto forward to `admin`, 
 
-It follows the [JAMstack architecture](https://jamstack.org) by using Git as a single source of truth, and [Netlify](https://www.netlify.com) for continuous deployment, and CDN distribution.
+And, added the `netlify-identity-widget` to perform signup/login/logout.
 
-## Prerequisites
+Demo, is in [HERE](https://inspiring-me-lwz7512.netlify.com/)
 
-- Node (I recommend using v8.2.0 or higher)
-- [Gatsby CLI](https://www.gatsbyjs.org/docs/)
+
+## Sceenshots
+
+![](screenshots.png)
+
+
+## Features
+
+* Mobile Screen support
+* Privacy control for post content view & profile page
+* User authentication by Netlify Identity Widget/Service
+* Pagination for posts
+* Navigation menu with active status
+
+
+## Deployment Prerequisites
+
+* Node (I recommend using v8.2.0 or higher) enviroment
+* [Gatsby CLI](https://www.gatsbyjs.org/docs/) installed
+* A netlify account;
+* A site app setup(New site from Git) in [netlify](https://app.netlify.com/);
+* `Enable Identity` in site Identity tab page;
+* An API endpoint URL needed while locally running;
+
 
 ## Getting Started (Recommended)
 
-Netlify CMS can run in any frontend web environment, but the quickest way to try it out is by running it on a pre-configured starter site with Netlify. The example here is the Kaldi coffee company template (adapted from [One Click Hugo CMS](https://github.com/netlify-templates/one-click-hugo-cms)). Use the button below to build and deploy your own copy of the repository:
+Use the button below to build and deploy your own copy of the repository:
 
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/AustinGreen/gatsby-starter-netlify-cms&amp;stack=cms"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 
 After clicking that button, you’ll authenticate with GitHub and choose a repository name. Netlify will then automatically create a repository in your GitHub account with a copy of the files from the template. Next, it will build and deploy the new site on Netlify, bringing you to the site dashboard when the build is complete. Next, you’ll need to set up Netlify’s Identity service to authorize users to log in to the CMS.
 
-### Access Locally
+### Develop Locally
 ```
 $ git clone https://github.com/[GITHUB_USERNAME]/[REPO_NAME].git
 $ cd [REPO_NAME]
 $ yarn
-$ npm run develop
+$ yarn develop
 ```
 To test the CMS locally, you'll need run a production build of the site:
 ```
 $ npm run build
 $ npm run serve
 ```
+
+after new .md page added, or modified, commit and push your local changes to remote git repository,
+then, netlify will automatically rebuild and publish the site.
+
+**REMEMBER**
+
+FIRST local `$ yarn build` to detect error, THEN commit and push...
+
 
 ## Getting Started (Without Netlify)
 ```
@@ -40,18 +70,7 @@ $ npm run build
 $ npm run serve
 ```
 
-### Setting up the CMS
-Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick-start/#authentication) to set up authentication, and hosting.
+### Still feel complex?
 
-## Debugging
-Windows users might encounter ```node-gyp``` errors when trying to npm install.
-To resolve, make sure that you have both Python 2.7 and the Visual C++ build environment installed.
-```
-npm config set python python2.7
-npm install --global --production windows-build-tools
-```
+try this [Netlify identity widget demo app](https://github.com/lwz7512/netlify-id-widget-demo) 
 
-[Full details here](https://www.npmjs.com/package/node-gyp 'NPM node-gyp page')
-
-## Purgecss
-This plugin uses [gatsby-plugin-purgecss](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss/) and [bulma](https://bulma.io/). The bulma builds are usually ~170K but reduced 90% by purgecss.

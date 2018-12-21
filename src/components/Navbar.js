@@ -10,14 +10,9 @@ import { getPathname } from '../services/auth'
 const Navbar = class extends React.Component {
 
 
-  constructor(props) {
-    super(props)
-  
-  }
-  
-
   componentDidMount() {
 
+    // ADD PAGE MENU EXPAND OR CLOSE SWITH
     // Get all "navbar-burger" elements
    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
     // Check if there are any navbar burgers
@@ -63,16 +58,16 @@ const Navbar = class extends React.Component {
         </div>
         <div id="navMenu" className="navbar-menu">
           <div className="navbar-start has-text-centered">
-            <Link className={`navbar-item gap ${pathname=='/'?'active':''}`} to="/">
+            <Link className={`navbar-item gap ${pathname==='/'?'active':''}`} to="/">
               Home
             </Link>
-            <Link className={`navbar-item gap ${pathname=='/products'?'active':''}`} to="/products">
+            <Link className={`navbar-item gap ${pathname==='/products'?'active':''}`} to="/products">
               Services
             </Link>
-            <Link className={`navbar-item gap ${pathname=='/contact'?'active':''}`} to="/contact">
+            <Link className={`navbar-item gap ${pathname==='/contact'?'active':''}`} to="/contact">
               Contact
             </Link>
-            <Link className={`navbar-item gap ${pathname=='/about'?'active':''}`} to="/about">
+            <Link className={`navbar-item gap ${pathname==='/about'?'active':''}`} to="/about">
               About
             </Link>
           </div>

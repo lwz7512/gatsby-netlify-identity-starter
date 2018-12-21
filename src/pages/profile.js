@@ -52,10 +52,10 @@ class Profile extends React.Component {
       backgroundColor: '#3273dc',
     }
   
-    const bBtn = {
-      ...button,
-      backgroundColor: '#FC461E',
-    }
+    // const bBtn = {
+    //   ...button,
+    //   backgroundColor: '#FC461E',
+    // }
   
   
     return (

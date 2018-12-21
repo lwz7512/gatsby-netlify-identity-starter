@@ -21,7 +21,7 @@ TODO ITEMS
 ### THIRD PHASE @2018.12.18
 
 * add pagination for posts ... DONE
-* extract PostItem component from index template 
+* extract PostItem component from index template ... DONE
 * add private routes for login ... DONE ... DONE
 * add underline in current navigation menu ... DONE
 

@@ -8,7 +8,7 @@ import { navigate } from "@reach/router"
 
 import BasePage from '../base/BasePage'
 
-import { isLoggedIn, loginNI, logoutNI } from "../services/auth"
+import { isLoggedIn, loginNI, } from "../services/auth"
 
 
 export default class LoginPage extends React.Component {
@@ -67,10 +67,10 @@ export default class LoginPage extends React.Component {
       backgroundColor: '#3273dc',
     }
 
-    const bBtn = {
-      ...button,
-      backgroundColor: '#FC461E',
-    }
+    // const bBtn = {
+    //   ...button,
+    //   backgroundColor: '#FC461E',
+    // }
 
 
     return (<BasePage ref={this.basepage}>

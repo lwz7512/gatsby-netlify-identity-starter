@@ -37,7 +37,7 @@ Demo, is in [HERE](https://inspiring-me-lwz7512.netlify.com/)
 
 Use the button below to build and deploy your own copy of the repository:
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/AustinGreen/gatsby-starter-netlify-cms&amp;stack=cms"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/lwz7512/gatsby-netlify-identity-starter&amp;stack=cms"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 
 After clicking that button, you’ll authenticate with GitHub and choose a repository name. Netlify will then automatically create a repository in your GitHub account with a copy of the files from the template. Next, it will build and deploy the new site on Netlify, bringing you to the site dashboard when the build is complete. Next, you’ll need to set up Netlify’s Identity service to authorize users to log in to the CMS.
 
@@ -64,7 +64,7 @@ FIRST local `$ yarn build` to detect error, THEN commit and push...
 
 ## Getting Started (Without Netlify)
 ```
-$ gatsby new [SITE_DIRECTORY_NAME] https://github.com/AustinGreen/gatsby-starter-netlify-cms/
+$ gatsby new [SITE_DIRECTORY_NAME] https://github.com/lwz7512/gatsby-netlify-identity-starter/
 $ cd [SITE_DIRECTORY_NAME]
 $ npm run build
 $ npm run serve

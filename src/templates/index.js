@@ -29,7 +29,8 @@ export default class IndexPage extends React.Component {
     
     const posts = get(this, 'props.data.allMarkdownRemark.edges')
     const { currentPage, numPages } = this.props.pageContext
-    
+    // Dont use this for post pagination...
+    // const location = this.props.location
 
     const cntBorder = { 
       // border: '1px solid #888',
@@ -41,11 +42,11 @@ export default class IndexPage extends React.Component {
      }
 
     return (
-      <BasePage>
+      <BasePage location={{pathname: '/'}}>
         <section className="section">
           <div className="container">
-            <div className="content">
-              {<h1 className="has-text-weight-bold is-size-3">新上</h1>}
+            <div className="content hide-in-mobile">
+              {<h1 className="has-text-weight-bold is-size-3">Latest</h1>}
             </div>
             {posts
               .map(({ node: post }) => (

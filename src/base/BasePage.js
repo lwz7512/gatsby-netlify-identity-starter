@@ -6,8 +6,9 @@ import React from 'react';
 
 import netlifyIdentity from 'netlify-identity-widget'
 import UserContext from '../context/UserContext'
-// import Layout from '../components/Layout'
+
 import BaseLayout from './BaseLayout'
+import { setPathname } from '../services/auth'
 
 export default class BasePage extends React.Component {
 
@@ -33,6 +34,10 @@ export default class BasePage extends React.Component {
   }
 
   render() {
+
+    const location = this.props.location;
+    if(location) setPathname(location.pathname);
+
     return (
       <UserContext.Provider value={this.state}>
         <BaseLayout>

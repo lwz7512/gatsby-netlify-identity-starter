@@ -19,8 +19,8 @@ const lkstyle = (i, currentPage) => {
   return {
     padding: 10,
     textDecoration: 'none',
-    color: i + 1 === currentPage ? '#ffffff' : '', 
-    background: i + 1 === currentPage ? '#007acc' : ''
+    color: i + 1 === currentPage ? '#ffffff' : '#D64000', 
+    background: i + 1 === currentPage ? '#D64000' : ''
   }
 }
 
@@ -35,7 +35,7 @@ const Pagination = ({currentPage, numPages}) => {
     <ul style={ulstyle}>
       {
         !isFirst &&
-        <Link to={prevPage} rel="prev">← Previous Page</Link>
+        <Link to={prevPage} rel="prev" className="has-text-primary">← Previous Page</Link>
       }
       {
         Array.from({ length: numPages }, (_, i) => (
@@ -56,7 +56,7 @@ const Pagination = ({currentPage, numPages}) => {
       }
       {
         !isLast &&
-        <Link to={nextPage} rel="next">Next Page →</Link>
+        <Link to={nextPage} rel="next" className="has-text-primary">Next Page →</Link>
       }
     </ul>
   )

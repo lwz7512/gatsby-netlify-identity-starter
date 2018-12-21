@@ -23,14 +23,26 @@ export const logoutNI = callback => {
   netlifyIdentity.on('logout', callback)
 }
 
-export const isBrowser = () => typeof window !== "undefined"
-
+// 4. get user data
 export const getUser = () =>
-  isBrowser() && window.localStorage.getItem("gatsbyUser")
-    ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
+  isBrowser() && netlifyIdentity.currentUser()
+    ? netlifyIdentity.currentUser()
     : {}
 
-const setUser = user => {
+// 5. save pathname
+export const setPathname = path => 
+  isBrowser() && window.localStorage.setItem('pathname', path)
+
+// 6. get pathname
+export const getPathname = () =>
+isBrowser() && window.localStorage.getItem('pathname')
+  ? window.localStorage.getItem('pathname')
+  : '/'
+
+export const isBrowser = () => typeof window !== "undefined"
+
+
+export const setUser = user => {
   window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
   return true;
 }

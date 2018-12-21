@@ -1,11 +1,12 @@
+/**
+ * login page with auth service(netlify identity)
+ * @2018/12/14
+ */
 import React from 'react';
 
-// import { navigate } from "gatsby"
 import { navigate } from "@reach/router"
 
 import BasePage from '../base/BasePage'
-// import Login from '../components/Login' // form
-import Spinner from '../components/Spinner'
 
 import { isLoggedIn, loginNI, logoutNI } from "../services/auth"
 
@@ -27,8 +28,7 @@ export default class LoginPage extends React.Component {
     this.setState({logged:isLoggedIn()})
   }
 
-  // DO NOT NAVIGATE TO '/' PROGRAMINGLY, OR CAUSE LOGIN BACKEND 
-  // 2018/12/14
+
   login() {
     console.log('login...')
     loginNI((user) => {
@@ -40,15 +40,6 @@ export default class LoginPage extends React.Component {
     })
   }
 
-  logout() {
-    console.log('logout....')
-    this.setState({loading:true})
-    logoutNI(() => {
-      this.setState({loading:false, logged: false})
-      this.basepage.current.updateUser(null)
-      // this.goHome()
-    })
-  }
 
   goHome() {
     setTimeout(()=>navigate('/', { replace: true }), 200)
@@ -56,7 +47,9 @@ export default class LoginPage extends React.Component {
 
   render() {
 
-    console.log(this.state)
+    // NOTE: can not use return here!
+    // @2018/12/20
+    if(this.state.logged) navigate('/app/profile');
 
     const button = {
       display: 'block',
@@ -88,9 +81,6 @@ export default class LoginPage extends React.Component {
                 <div className="content">
                   <h1 className="has-text-weight-bold is-size-2">Welcome Dear</h1>
                 </div>
-                <button style={oBtn} onClick={this.logout.bind(this)}>Logout</button>
-                {<button style={bBtn} onClick={this.goHome.bind(this)}>GoHome</button>}
-                {this.state.loading?<Spinner/>:false}
               </>):
               (<>
                 <div className="content">
@@ -99,7 +89,6 @@ export default class LoginPage extends React.Component {
                 <button style={oBtn} onClick={this.login.bind(this)}>Login</button>
               </>)
             }
-            {/*<Login onSucces="" onFailure=""/>*/}
           </div>
         </section>
       </BasePage>)

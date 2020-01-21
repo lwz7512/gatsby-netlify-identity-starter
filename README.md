@@ -2,7 +2,7 @@
 
 **Note:** This starter is based on the [Gatsby + Netlify CMS Starter](https://github.com/netlify-templates/gatsby-starter-netlify-cms).
 
-**But:** Remove the `gatsby-plugin-netlify-cms` and `netlify-cms` dependenicy to disable auto forward to `admin`, 
+**But:** Remove the `gatsby-plugin-netlify-cms` and `netlify-cms` dependencies to disable auto forward to `admin`, 
 
 And, added the `netlify-identity-widget` to perform signup/login/logout.
 
@@ -25,7 +25,7 @@ Demo, is in [HERE](https://inspiring-me-lwz7512.netlify.com/)
 
 ## Deployment Prerequisites
 
-* Node (I recommend using v8.2.0 or higher) enviroment
+* Node (I recommend using v8.2.0 or higher) environment
 * [Gatsby CLI](https://www.gatsbyjs.org/docs/) installed
 * A netlify account;
 * A site app setup(New site from Git) in [netlify](https://app.netlify.com/);
